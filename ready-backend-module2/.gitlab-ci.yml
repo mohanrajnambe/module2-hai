@@ -1,0 +1,31 @@
+image: docker:latest
+
+services:
+  - docker:stable-dind
+
+before_script:
+  - apk update && apk add --no-cache python3 py3-pip
+  - apk add --no-cache aws-cli
+  - df -a          # Check overall disk space usage in instance
+
+stages:
+  - build
+  - deploy
+
+build_image:
+  stage: build
+  script:
+    - echo $(aws ecr get-login-password --region $AWS_DEFAULT_REGION) | docker login -u AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+    - docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_NAME .
+    - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_NAME
+  only:
+    - main
+
+deploy_to_ecs:
+  stage: deploy
+  script:
+    - echo "CLUSTER_NAME - $CLUSTER_NAME"
+    - echo "SERVICE_NAME - $SERVICE_NAME"
+    - aws ecs update-service --cluster $CLUSTER_NAME --service $SERVICE_NAME --force-new-deployment
+  only:
+    - main

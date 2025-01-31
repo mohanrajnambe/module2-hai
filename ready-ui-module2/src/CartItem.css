@@ -1,0 +1,33 @@
+.cart-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.cart-item-thumbnail {
+  width: 50px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.cart-item-info {
+  flex: 1;
+}
+
+.cart-item-title {
+  font-weight: bold;
+  margin: 0;
+}
+
+.cart-item-author {
+  font-size: 0.9em;
+  color: #555;
+  margin: 0;
+}
+
+.cart-item-remove-button {
+  margin-left: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}

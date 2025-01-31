@@ -1,0 +1,241 @@
+/* Base styles */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.header-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.cart-overlay {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 300px;
+  height: 100%;
+  background-color: white;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+  transition: right 0.3s ease;
+  padding: 20px;
+  z-index: 1000;
+}
+
+.cart-overlay.open {
+  right: 0;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.cart-icon,
+.logout-button {
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #3b82f6, #9333ea);
+  color: white;
+  padding: 30px;
+  text-align: center;
+  font-size: 2.5em;
+  font-weight: 400; /* Increased font weight */
+  letter-spacing: 1px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added shadow */
+}
+
+/* Recommended books container */
+.recommended-books {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 30px;
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Book card */
+.book-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: auto;
+  position: relative; /* Added for positioning the button */
+}
+
+.book-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.book-thumbnail {
+  width: 100%;
+  height: 350px; /* Fixed height for all images */
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 15px;
+}
+
+.book-info {
+  padding: 20px;
+}
+
+.book-title {
+  font-size: 1.5em;
+  margin: 10px 0;
+  color: #222;
+  font-weight: 500;
+}
+
+.book-author {
+  color: #888;
+  font-size: 1em;
+  margin-bottom: 15px;
+}
+
+/* Inspiration notes */
+.inspiration-notes {
+  background-color: #f7f7f7;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  height: 250px; /* Fixed height for 3-4 lines */
+  overflow: hidden;
+}
+
+.note-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+}
+
+.note-text {
+  font-style: italic;
+  font-size: 1em;
+  text-align: center;
+  max-width: 90%;
+}
+
+.note-contributor {
+  font-weight: bold;
+  color: #444;
+  font-size: 1em;
+}
+
+/* Add to Cart button */
+.add-to-cart-button {
+  display: none;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.book-card:hover .add-to-cart-button,
+.book-card:active .add-to-cart-button {
+  display: block;
+}
+
+.add-to-cart-button:hover {
+  background-color: #2563eb;
+}
+
+/* Footer */
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+
+.ul-none +ul {
+    display: none;
+    opacity: 0;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f9f9f9;
+  color: #333;
+  padding: 20px;
+}
+
+.App-title {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.App-tagline {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.login-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 12px;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #5e5e5e;
+  background-color: #ffffff;
+  border: 1px solid #8c8c8c;
+  /* border-radius: 2px; */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  height: 41px;
+}
+
+.login-button:hover {
+  background-color: #f3f3f3; /* Slightly lighter background for hover */
+}
+
+.microsoft-icon {
+  margin-right: 12px;
+}
