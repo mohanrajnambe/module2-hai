@@ -29,14 +29,11 @@ const Cart: React.FC = () => {
     const fetchBooks = async () => {
       try {
         setIsBookLoading(true);
-        const response = await axiosInstance.get(`books/${cartItems[0]}`);
-        const data = response.data;
-
-        if (data) {
-          setBooks((prevBooks) => [...prevBooks, data]);
-        } else {
-          console.error(`Failed to fetch book: ${response.statusText}`);
-        }
+        const responses = await Promise.all(
+          cartItems.map((id) => axiosInstance.get(`books/${id}`))
+        );
+        const data = responses.map((response) => response.data);
+        setBooks(data);
       } catch (error) {
         console.error('Error fetching book:', error);
       } finally {
