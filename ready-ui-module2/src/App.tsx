@@ -16,7 +16,7 @@ import {
   Switch
 } from '@nextui-org/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import { CartProvider, useCart } from './context/CartContext';
+import { CartProvider } from './context/CartContext';
 import RecommendedBooks from './RecommendedBooks';
 import Login from './components/Login';
 
@@ -31,12 +31,15 @@ import { useSetAtom } from 'jotai';
 import { userPhotoAtom } from './atoms/userAtom';
 import AdminApprovals from './pages/AdminApprovals';
 import ProfileMenu from './components/ProfileMenu';
+import { CartIcon } from './icons/CartIcon';
+import { useCart } from './context/CartContext';
 
 const adminRoutes = ['/admin/orders', '/admin/inventory', '/admin/approvals'];
 
 function AppContent() {
   const [isDark, setIsDark] = useState(true);
   const { instance, accounts } = useMsal();
+  const { cartItems } = useCart();
   const isAuthenticated = useIsAuthenticated();
   const navigate = useNavigate();
   const location = useLocation();
@@ -203,6 +206,18 @@ function AppContent() {
                   />
                 </div>
               </NavbarItem>
+              <NavbarItem>
+                <div className='relative'>
+                  <Button variant='light' onClick={() => navigate('/cart')}>
+                    <CartIcon className='h-6 w-6' />
+                    {cartItems.length > 0 && (
+                      <span className='absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform -translate-x-[10px] translate-y-[5px] bg-red-600 rounded-full'>
+                        {cartItems.length}
+                      </span>
+                    )}
+                  </Button>
+                </div>
+              </NavbarItem>
               {isAdmin && (
                 <>
                   <NavbarItem className='hidden sm:flex flex-col'>
@@ -312,7 +327,18 @@ function AppContent() {
           }
         />
 
-        {/* User Routes */}
+        {/* Cart Route */}
+        <Route
+          path='/cart'
+          element={
+            isAuthenticated ? (
+              <Cart />
+            ) : (
+              <Navigate to='/login' replace />
+            )
+          }
+        />
+
         {!isAdmin && (
           <>
             <Route

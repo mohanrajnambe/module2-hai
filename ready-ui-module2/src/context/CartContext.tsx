@@ -27,13 +27,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const addToCart = (id: string) => {
     setCartItems((prevItems) => {
-      // if (prevItems.length > 0) {
-      //   const confirmReplace = window.confirm("Your cart already contains a book. Do you want to replace it?");
-      //   if (!confirmReplace) {
-      //     return prevItems;
-      //   }
-      // }
-      return [id];
+      return [...prevItems, id];
     });
   };
 

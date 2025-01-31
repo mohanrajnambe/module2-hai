@@ -138,12 +138,7 @@ const RecommendedBooks: React.FC<RecommendedBooksProps> = ({ isAdmin }) => {
     if (cartItems.includes(bookId)) {
       removeFromCart(bookId);
     } else {
-      if (cartItems.length === 0) {
-        addToCart(bookId);
-      } else {
-        setCurrentSelectedBook(bookId);
-        onOpen();
-      }
+      addToCart(bookId);
     }
   };
 
